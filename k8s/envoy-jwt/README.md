@@ -97,7 +97,7 @@ This new `auth-helper` service must be added as a sidecar and must be configured
 
 ```console
 - name: auth-helper
-  image: envoy-jwt-auth-helper:1.0.0
+  image: us.gcr.io/scytale-registry/envoy-jwt-auth-helper@sha256:e55ce5fd42f13c5475b285a848c5f83bc4a335a93d7f934d3ac884920045fc96
   imagePullPolicy: IfNotPresent
   args:  ["-config", "/run/envoy-jwt-auth-helper/config/envoy-jwt-auth-helper.conf"]
   ports:
@@ -107,7 +107,7 @@ This new `auth-helper` service must be added as a sidecar and must be configured
     mountPath: "/run/envoy-jwt-auth-helper/config"
     readOnly: true
   - name: spire-agent-socket
-    mountPath: /run/spire/sockets
+    mountPath: /tmp/spire-agent/public
     readOnly: true
 ```
 

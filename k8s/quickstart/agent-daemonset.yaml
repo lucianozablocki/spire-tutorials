@@ -28,7 +28,7 @@ spec:
           args: ["-t", "30", "spire-server:8081"]
       containers:
         - name: spire-agent
-          image: gcr.io/spiffe-io/spire-agent:0.12.0
+          image: gcr.io/spiffe-io/spire-agent@sha256:e93e6879cc2a231a4983444312d8c32523c1106f388df275dca0db484cca312f
           args: ["-config", "/run/spire/config/agent.conf"]
           volumeMounts:
             - name: spire-config
@@ -37,7 +37,8 @@ spec:
             - name: spire-bundle
               mountPath: /run/spire/bundle
             - name: spire-agent-socket
-              mountPath: /run/spire/sockets
+              # mountPath: /run/spire/sockets
+              mountPath: /tmp/spire-agent/public
               readOnly: false
           livenessProbe:
             exec:
@@ -45,7 +46,7 @@ spec:
                 - /opt/spire/bin/spire-agent
                 - healthcheck
                 - -socketPath
-                - /run/spire/sockets/agent.sock
+                - /tmp/spire-agent/public/api.sock
             failureThreshold: 2
             initialDelaySeconds: 15
             periodSeconds: 60
@@ -59,5 +60,6 @@ spec:
             name: spire-bundle
         - name: spire-agent-socket
           hostPath:
-            path: /run/spire/sockets
+            # path: /run/spire/sockets
+            path: /tmp/spire-agent/public
             type: DirectoryOrCreate

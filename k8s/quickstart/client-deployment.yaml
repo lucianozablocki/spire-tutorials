@@ -18,15 +18,17 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: client
-          image: gcr.io/spiffe-io/spire-agent:0.12.0
+          image: gcr.io/spiffe-io/spire-agent@sha256:e93e6879cc2a231a4983444312d8c32523c1106f388df275dca0db484cca312f
           command: ["sleep"]
           args: ["1000000000"]
           volumeMounts:
             - name: spire-agent-socket
-              mountPath: /run/spire/sockets
+              # mountPath: /run/spire/sockets
+              mountPath: /tmp/spire-agent/public
               readOnly: true
       volumes:
         - name: spire-agent-socket
           hostPath:
-            path: /run/spire/sockets
+            # path: /run/spire/sockets
+            path: /tmp/spire-agent/public
             type: Directory

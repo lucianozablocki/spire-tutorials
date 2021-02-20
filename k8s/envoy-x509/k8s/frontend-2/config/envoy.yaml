@@ -46,7 +46,7 @@ static_resources:
     http2_protocol_options: {}
     hosts:
       - pipe:
-          path: /run/spire/sockets/agent.sock
+          path: /tmp/spire-agent/public/api.sock
   - name: backend
     connect_timeout: 0.25s
     type: strict_dns

@@ -25,7 +25,8 @@ spec:
           mountPath: "/run/envoy"
           readOnly: true
         - name: spire-agent-socket
-          mountPath: /run/spire/sockets
+          # mountPath: /run/spire/sockets
+          mountPath: /tmp/spire-agent/public
           readOnly: true
       - name: backend
         image: nginx
@@ -47,7 +48,8 @@ spec:
           name: backend-envoy
       - name: spire-agent-socket
         hostPath:
-          path: /run/spire/sockets
+          # mountPath: /run/spire/sockets
+          path: /tmp/spire-agent/public
           type: Directory
       - name: backend-balance-json-data
         configMap:

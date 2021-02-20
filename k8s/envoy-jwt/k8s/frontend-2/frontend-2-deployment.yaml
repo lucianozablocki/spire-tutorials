@@ -23,7 +23,7 @@ spec:
           mountPath: "/run/envoy"
           readOnly: true
         - name: spire-agent-socket
-          mountPath: /run/spire/sockets
+          mountPath: /tmp/spire-agent/public
           readOnly: true
       - name: auth-helper
         image: us.gcr.io/scytale-registry/envoy-jwt-auth-helper@sha256:e55ce5fd42f13c5475b285a848c5f83bc4a335a93d7f934d3ac884920045fc96
@@ -36,7 +36,7 @@ spec:
           mountPath: "/run/envoy-jwt-auth-helper/config"
           readOnly: true
         - name: spire-agent-socket
-          mountPath: /run/spire/sockets
+          mountPath: /tmp/spire-agent/public
           readOnly: true
       - name: frontend-2
         imagePullPolicy: IfNotPresent
@@ -53,7 +53,7 @@ spec:
           name: frontend-2-envoy
       - name: spire-agent-socket
         hostPath:
-          path: /run/spire/sockets
+          path: /tmp/spire-agent/public
           type: DirectoryOrCreate
       - name: envoy-jwt-auth-helper-config
         configMap:

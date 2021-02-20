@@ -75,7 +75,7 @@ data:
         http2_protocol_options: {}
         hosts:
           - pipe:
-              path: /run/spire/sockets/agent.sock
+              path: /tmp/spire-agent/public/api.sock
       - name: local_service
         connect_timeout: 1s
         type: strict_dns

@@ -91,7 +91,7 @@ clusters:
   http2_protocol_options: {}
   hosts:
     - pipe:
-        path: /run/spire/sockets/agent.sock
+        path: /tmp/spire-agent/public/api.sock
 ```
 
 ### TLS Certificates
